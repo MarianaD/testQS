@@ -1,0 +1,11 @@
+# ignore all files in the doc/ directory
+doc/
+# ignore all files in the bin/ directory
+bin/
+# ignore all files in the Diagram/ directory
+Diagram/
+#ignore files project and classpath
+*.project
+*.classpath
+# ignore all files in the .settings// directory
+.settings/
