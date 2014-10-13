@@ -77,11 +77,7 @@ public class PlaylistClass implements Playlist {
 	 */
 	@Override
 	public String getName() {
-		if (this.currentMusic == null) {
-			this.fM = new ForwardMusicIterator(this);
-			this.currentMusic = (fM.hasNext()) ? fM.next().getName() : null;
-		}
-		return this.currentMusic;
+		return this.name;
 	}
 
 	/*
@@ -210,6 +206,8 @@ public class PlaylistClass implements Playlist {
 		Collections.sort(list, new Comparator<Map.Entry<String, ArtistInfo>>() {
 			public int compare(Map.Entry<String, ArtistInfo> o1,
 					Map.Entry<String, ArtistInfo> o2) {
+				
+				//First, it will evaluate the number of musics of the both artists
 				int nrM = o2.getValue().getNrMusics()
 						- o1.getValue().getNrMusics();
 				if (nrM > 0) {
@@ -217,6 +215,7 @@ public class PlaylistClass implements Playlist {
 				} else if (nrM < 0) {
 					return -1;
 				} else {
+					//If this not enough, it will evaluate the longest duration
 					int sizeP = o2.getValue().getLongestDuration()
 							- o1.getValue().getLongestDuration();
 					if (sizeP > 0) {
@@ -224,6 +223,8 @@ public class PlaylistClass implements Playlist {
 					} else if (sizeP < 0) {
 						return -1;
 					} else {
+						//And finally, as last resource, it will compare in 
+						//lexicographic terms the lower artist
 						return o1.getKey().compareToIgnoreCase(o2.getKey());
 					}
 				}

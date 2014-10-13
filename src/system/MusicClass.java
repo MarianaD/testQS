@@ -14,6 +14,11 @@ import java.util.Comparator;
  */
 public class MusicClass implements Music {
 
+	
+	public static final String FORMAT_MP3 = "mp3";
+	public static final String FORMAT_WAV = "wav";
+	public static final String FORMAT_AIFF = "aiff";
+	
 	private String musicName;
 	private String artist;
 	private int duration;
@@ -35,12 +40,18 @@ public class MusicClass implements Music {
 	 *            the music's classification
 	 */
 	public MusicClass(String musicName, String artist, int duration,
-			String fileFormat, int rating) {
+			String fF, int rating) {
 		this.musicName = musicName;
 		this.artist = artist;
 		this.duration = duration;
-		this.fileFormat = fileFormat;
 		this.rating = rating;
+		
+		if(fF.equalsIgnoreCase(FORMAT_MP3) || fF.equalsIgnoreCase(FORMAT_WAV) || fF.equalsIgnoreCase(FORMAT_AIFF)){
+			this.fileFormat = fF;
+		}else {
+			this.fileFormat = FORMAT_MP3;
+		}
+		
 
 	}
 
@@ -101,7 +112,8 @@ public class MusicClass implements Music {
 	 */
 	@Override
 	public boolean equals(Music m) {
-		return (m.getName().equals(musicName) && m.getArtist().equals(artist) && 
+		System.out.println("- equals music used");
+		return (m.getName().equalsIgnoreCase(musicName) && m.getArtist().equalsIgnoreCase(artist) && 
 				(m.getDuration() == duration));
 	}
 
@@ -163,14 +175,14 @@ public class MusicClass implements Music {
 		if (artist == null) {
 			if (other.artist != null)
 				return false;
-		} else if (!artist.equals(other.artist))
+		} else if (!artist.equalsIgnoreCase(other.artist))
 			return false;
 		if (duration != other.duration)
 			return false;
 		if (musicName == null) {
 			if (other.musicName != null)
 				return false;
-		} else if (!musicName.equals(other.musicName))
+		} else if (!musicName.equalsIgnoreCase(other.musicName))
 			return false;
 		return true;
 	}
@@ -187,13 +199,29 @@ public class MusicClass implements Music {
 		 */
 		public int compare(Music m1, Music m2) {
 
-			int m1Rating = m1.getRating();
-			int m2Rating = m2.getRating();
-
-			return m2Rating - m1Rating;
-
+			int cmpNames = m1.getName().compareToIgnoreCase(m2.getName());
+			if(cmpNames == 0){
+				int cmpArtist = m1.getArtist().compareToIgnoreCase(m2.getArtist());
+				if(cmpArtist == 0){
+					return m1.getDuration() - m2.getDuration();
+				}else{
+					return cmpArtist;
+				}
+			}else{
+				return cmpNames;
+			}
+			
 		}
 
 	};
 
+	@Override
+	public String toString() {
+		return "MusicClass [musicName=" + musicName + ", artist=" + artist
+				+ ", duration=" + duration + ", fileFormat=" + fileFormat
+				+ ", rating=" + rating + "]";
+	}
+
+	
+	
 }
