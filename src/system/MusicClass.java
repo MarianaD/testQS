@@ -14,11 +14,10 @@ import java.util.Comparator;
  */
 public class MusicClass implements Music {
 
-	
 	public static final String FORMAT_MP3 = "mp3";
 	public static final String FORMAT_WAV = "wav";
 	public static final String FORMAT_AIFF = "aiff";
-	
+
 	private String musicName;
 	private String artist;
 	private int duration;
@@ -34,24 +33,24 @@ public class MusicClass implements Music {
 	 *            the artist's name
 	 * @param duration
 	 *            the music's duration
-	 * @param fileFormat
+	 * @param fF
 	 *            the music's file format
 	 * @param rating
 	 *            the music's classification
 	 */
-	public MusicClass(String musicName, String artist, int duration,
-			String fF, int rating) {
+	public MusicClass(String musicName, String artist, int duration, String fF,
+			int rating) {
 		this.musicName = musicName;
 		this.artist = artist;
 		this.duration = duration;
 		this.rating = rating;
-		
-		if(fF.equalsIgnoreCase(FORMAT_MP3) || fF.equalsIgnoreCase(FORMAT_WAV) || fF.equalsIgnoreCase(FORMAT_AIFF)){
+
+		if (fF.equalsIgnoreCase(FORMAT_MP3) || fF.equalsIgnoreCase(FORMAT_WAV)
+				|| fF.equalsIgnoreCase(FORMAT_AIFF)) {
 			this.fileFormat = fF;
-		}else {
+		} else {
 			this.fileFormat = FORMAT_MP3;
 		}
-		
 
 	}
 
@@ -113,8 +112,8 @@ public class MusicClass implements Music {
 	@Override
 	public boolean equals(Music m) {
 		System.out.println("- equals music used");
-		return (m.getName().equalsIgnoreCase(musicName) && m.getArtist().equalsIgnoreCase(artist) && 
-				(m.getDuration() == duration));
+		return (m.getName().equalsIgnoreCase(musicName)
+				&& m.getArtist().equalsIgnoreCase(artist) && (m.getDuration() == duration));
 	}
 
 	/*
@@ -200,17 +199,18 @@ public class MusicClass implements Music {
 		public int compare(Music m1, Music m2) {
 
 			int cmpNames = m1.getName().compareToIgnoreCase(m2.getName());
-			if(cmpNames == 0){
-				int cmpArtist = m1.getArtist().compareToIgnoreCase(m2.getArtist());
-				if(cmpArtist == 0){
+			if (cmpNames == 0) {
+				int cmpArtist = m1.getArtist().compareToIgnoreCase(
+						m2.getArtist());
+				if (cmpArtist == 0) {
 					return m1.getDuration() - m2.getDuration();
-				}else{
+				} else {
 					return cmpArtist;
 				}
-			}else{
+			} else {
 				return cmpNames;
 			}
-			
+
 		}
 
 	};
@@ -222,6 +222,4 @@ public class MusicClass implements Music {
 				+ ", rating=" + rating + "]";
 	}
 
-	
-	
 }

@@ -12,14 +12,11 @@ import java.util.*;
  * @author Mariana Diogo
  *
  */
-/*
- *
- */
 public class PlaylistClass implements Playlist {
 
 	public static final int MAX_SIZE = 256;
 
-	private String currentMusic;
+	//private String currentMusic;
 	private int size;
 	private String name;
 	private int duration;
@@ -206,8 +203,9 @@ public class PlaylistClass implements Playlist {
 		Collections.sort(list, new Comparator<Map.Entry<String, ArtistInfo>>() {
 			public int compare(Map.Entry<String, ArtistInfo> o1,
 					Map.Entry<String, ArtistInfo> o2) {
-				
-				//First, it will evaluate the number of musics of the both artists
+
+				// First, it will evaluate the number of musics of the both
+				// artists
 				int nrM = o2.getValue().getNrMusics()
 						- o1.getValue().getNrMusics();
 				if (nrM > 0) {
@@ -215,7 +213,7 @@ public class PlaylistClass implements Playlist {
 				} else if (nrM < 0) {
 					return -1;
 				} else {
-					//If this not enough, it will evaluate the longest duration
+					// If this not enough, it will evaluate the longest duration
 					int sizeP = o2.getValue().getLongestDuration()
 							- o1.getValue().getLongestDuration();
 					if (sizeP > 0) {
@@ -223,8 +221,8 @@ public class PlaylistClass implements Playlist {
 					} else if (sizeP < 0) {
 						return -1;
 					} else {
-						//And finally, as last resource, it will compare in 
-						//lexicographic terms the lower artist
+						// And finally, as last resource, it will compare in
+						// lexicographic terms the lower artist
 						return o1.getKey().compareToIgnoreCase(o2.getKey());
 					}
 				}
@@ -266,12 +264,12 @@ public class PlaylistClass implements Playlist {
 		}
 		if (fM.hasNext()) {
 			m = fM.next();
-			this.currentMusic = m.getName();
+			//this.currentMusic = m.getName();
 		} else {
 			// If found the end of the iterator, it goes back to the beginning
 			this.fM = new ForwardMusicIterator(this);
 			m = fM.next();
-			this.currentMusic = m.getName();
+			//this.currentMusic = m.getName();
 		}
 		return m;
 	}
@@ -289,12 +287,12 @@ public class PlaylistClass implements Playlist {
 		}
 		if (bM.hasNext()) {
 			m = bM.next();
-			this.currentMusic = m.getName();
+			//this.currentMusic = m.getName();
 		} else {
 			// If found the end of the iterator, it goes back to the beginning
 			this.bM = new BackwardMusicIterator(this);
 			m = bM.next();
-			this.currentMusic = m.getName();
+			//this.currentMusic = m.getName();
 		}
 		return m;
 	}
@@ -312,12 +310,12 @@ public class PlaylistClass implements Playlist {
 		}
 		if (oM.hasNext()) {
 			m = oM.next();
-			this.currentMusic = m.getName();
+			//this.currentMusic = m.getName();
 		} else {
 			// If found the end of the iterator, it goes back to the beginning
 			this.bM = new OrderedMusicIterator(this);
 			m = bM.next();
-			this.currentMusic = m.getName();
+			//this.currentMusic = m.getName();
 		}
 		return m;
 	}
@@ -343,9 +341,8 @@ public class PlaylistClass implements Playlist {
 		}
 
 		/* *********************************************
-		 * Getters and Setters********************************************
-		 */
-		
+		 *             Getters and Setters
+		 *********************************************/
 
 		/**
 		 * Get the duration of the longest music of this artist in the playlist
@@ -374,7 +371,6 @@ public class PlaylistClass implements Playlist {
 		public int getNrMusics() {
 			return nrMusics;
 		}
-
 
 		/**
 		 * Set the number of musics of this artist in the playlist
